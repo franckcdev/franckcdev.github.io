@@ -573,7 +573,8 @@ resumeautorotation(forcehotspot);
 		
 		set(layer[controlBar_classicmenu_controlbar_bg_img].width, get(controlBar_classicbutton_pos));
 		set(layer[controlBar_classicmenu_controlbar_bg].width, get(controlBar_classicbutton_pos));
-		controlBar_classicshowMenuControls();
+		showTourControls();
+
 	</action>
 
 
@@ -789,7 +790,7 @@ resumeautorotation(forcehotspot);
     <layer name="controlBar_classicbtn_hidecontrols"
             url="%FIRSTXML%/graphics/classiccontrolbar/btn_hide_controls.png"
             style="controlBar_classic_btn_style"
-            onclick="controlBar_classichideMenuControls();hideTourControls();
+            onclick="hideTourControls();
 "
             visible="false"
             tooltip="controlBar_classichideControlsTip"
@@ -797,7 +798,7 @@ resumeautorotation(forcehotspot);
     <layer name="controlBar_classicbtn_showcontrols"
             url="%FIRSTXML%/graphics/classiccontrolbar/btn_show_controls.png"
             style="controlBar_classic_btn_style"
-            onclick="controlBar_classicshowMenuControls();showTourControls();
+            onclick="showTourControls();
 "
             tooltip="controlBar_classicdisplayControlsTip"
             visible="false"
@@ -807,6 +808,10 @@ resumeautorotation(forcehotspot);
 
 
 
+  <events name="controlBar_classichideshowcontrolsevent" 
+    hidetourcontrols="controlBar_classichideMenuControls();" 
+    showtourcontrols="controlBar_classicshowMenuControls();" 
+    keep="true" />
 
   <action name="controlBar_classichideMenuControls">
     set(controlBar_classicIsOpened, false);
@@ -940,7 +945,7 @@ resumeautorotation(forcehotspot);
 	</action>
 	<action name="controlBar_classicupdateHelpButtons">
 	if (device.desktop,
-		if (controlBar_classicIsOpened,
+		if (tour_displaycontrols,
 			controlBar_classicShowHelpButtons();
 		,
 			controlBar_classicHideHelpButtons();
@@ -974,7 +979,7 @@ resumeautorotation(forcehotspot);
 		);
 	</action>
 	<action name="controlBar_classicupdateFullscreenButtons">
-		if (controlBar_classicIsOpened,
+		if (tour_displaycontrols,
 			controlBar_classicShowFullscreenButtons();
 		,
 			controlBar_classicHideFullscreenButtons();
@@ -1001,7 +1006,7 @@ resumeautorotation(forcehotspot);
 		);
 	</action>
 	<action name="controlBar_classicupdateAutorotationButtons">
-		if (controlBar_classicIsOpened,
+		if (tour_displaycontrols,
 			controlBar_classicShowAutorotationButtons();
 		,
 			controlBar_classicHideAutorotationButtons();
@@ -1027,7 +1032,7 @@ resumeautorotation(forcehotspot);
 		);
 	</action>
 	<action name="controlBar_classicupdateSoundButtons">
-		if (controlBar_classicIsOpened,
+		if (tour_displaycontrols,
 			controlBar_classicShowSoundButtons();
 		,
 			controlBar_classicHideSoundButtons();
@@ -1699,11 +1704,6 @@ getmessage(urltoopen,logowebsiteurl);openurl(get(urltoopen),_blank);
 
 
 
-  <!-- Hide / Show Controls -->
-  <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
-  <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
-
-
 <action name="viewControlMoveUp">
 	if(%1,
 		if(%2,
@@ -1843,6 +1843,11 @@ getmessage(urltoopen,logowebsiteurl);openurl(get(urltoopen),_blank);
 <action name="viewControlZoomStop">
 	set(fov_moveforce, 0);
 </action>
+
+  <!-- Hide / Show Controls -->
+  <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
+  <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
+
 
   <!-- Fullscreen Management -->
   <action name="exitFullScreen" devices="fullscreensupport">set(tour_fullscreen,false);js(setFullscreen(false));</action>

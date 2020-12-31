@@ -27,7 +27,7 @@
 
 
   <krpano vrtourdevice.desktop="desktop" vrtourdevice.tablet="tablet" vrtourdevice.mobile="mobile" />
-  <krpano vrtourdevicescale.desktop="1.0" vrtourdevicescale.tablet="1.0" vrtourdevicescale.mobile="2.0" />
+  <krpano vrtourdevicescale.desktop="1.0" vrtourdevicescale.tablet="1.0" vrtourdevicescale.mobile="1.0" />
   <action name="vrtourcurrentscale" autorun="preinit">
     mul(stagescale,get(vrtourdevicescale));
   </action>

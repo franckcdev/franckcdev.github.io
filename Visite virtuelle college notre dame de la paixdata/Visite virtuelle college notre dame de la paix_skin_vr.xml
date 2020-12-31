@@ -153,11 +153,6 @@ resumeautorotation(forcehotspot);
 
 
 
-  <!-- Hide / Show Controls -->
-  <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
-  <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
-
-
 <action name="viewControlMoveUp">
 	if(%1,
 		if(%2,
@@ -297,6 +292,11 @@ resumeautorotation(forcehotspot);
 <action name="viewControlZoomStop">
 	set(fov_moveforce, 0);
 </action>
+
+  <!-- Hide / Show Controls -->
+  <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
+  <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
+
 
   <!-- Fullscreen Management -->
   <action name="exitFullScreen" devices="fullscreensupport">set(tour_fullscreen,false);js(setFullscreen(false));</action>
